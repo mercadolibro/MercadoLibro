@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Representa la Identidad "clientes" del proyecto "Mercado-Libro"
+ * 
+ * @author John de la rosa Bueno  <bueno-2008@hotmail.com>
+ * @author Guillermo miranda  <guillesistem93@hotmail.com>
+ * @author Gilberto Plata  <plata_gilberto@hotmail.com>
+ * @author Gilmar Ocampo Nieves  <giocni@gmail.com>
+ * 
+ */
 class Clientes {
     
     // ##### Atributs ####
