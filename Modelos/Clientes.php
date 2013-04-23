@@ -8,8 +8,41 @@
  * @author Gilmar Ocampo Nieves  <giocni@gmail.com>
  * 
  */
-class Clientes {
+class Clientes extends Modelos{
+  
+
+    public function __construct() {
+        parent::__construct();
+    }
+
+    private function buscarclientes(Clientes $user, array $props) {
+        if (array_key_exists('cedula', $props)) {
+            $user->setCedula($props['cedula']);
+        }
+        if (array_key_exists('nombre', $props)) {
+            $user->setNombre($props['nombre']);
+        }
+        if (array_key_exists('apellido', $props)) {
+            $user->setApellido($props['apellido']);
+        }
+        if (array_key_exists('direccion', $props)) {
+            $user->setDireccion($props['direccion']);
+        }
+        if (array_key_exists('telefono', $props)) {
+            $user->setTelefono($props['telefono']);
+        }
+    }
     
+      private function getParametros(Clientes $clientes) {
+        $parametros = array(
+            ':cedula' => $clientes->getCedula(),
+            ':nombre' => $clientes->getNombre(),
+            ':apellido' => $clientes->getApellido(),
+            ':direccion' => $clientes->getDireccion(),
+             ':telefono' => $clientes->getTelefono(),
+        );
+        return $parametros;
+    }
     // ##### Atributs ####
     
     /**
@@ -137,6 +170,24 @@ class Clientes {
     {
         return $this->telefono;
     }
+    public function crearClientes(Clientes $user) {
+        $sql = "INSERT INTO test.Clientes (cedula, nombre, apellido, direccion, telefono) VALUES (?,?,?,?,?)";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametros($user));
+    }
+    public function recibirClientes() {
+        $sql = "SELECT cedula, nombre, apellido, direccion, telefono FROM test.usuario";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $clientes = array();
+        foreach ($resultado as $fila) {
+            $user = new Clientes();
+            $this->buscarclientes($user, $fila);
+            $clientes[$user->getCedula()] = $user;
+        }
+        return $clientes;
+    }
+
 }
 
 ?>
