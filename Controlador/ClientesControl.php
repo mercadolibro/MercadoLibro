@@ -21,7 +21,36 @@ class ClientesControl extends Controlador{
         $this->modelo = new Clientes();
         $datos = $this->modelo->recibirClientes();
         $this->vista->setDatos($datos);
-        return $this->vista->Mostrar();;
+        return $this->vista->Mostrar();
+    }
+    
+    public function registro()
+    {
+        return $this->vista->Mostrar();
+    }
+    
+    public function guardar()
+    {
+        $cli = new Clientes();
+        $cli->setCedula($_POST['txtCedula']);
+        $cli->setNombre($_POST['txtNombre']);
+        $cli->setApellido($_POST['txtApellido']);
+        $cli->setDireccion($_POST['txtDireccion']);
+        $cli->setTelefono($_POST['txtTelefono']);
+        return $cli->registrar_cliente();
+    }
+    
+    public function volver()
+    {
+        return $this->vista->Mostrar();
+    }
+    
+    public function lista()
+    {
+        $this->modelo = new Clientes();
+        $datos = $this->modelo->recibirClientes();
+        $this->vista->setDatos($datos);
+        return $this->vista->Mostrar();
     }
     
 }

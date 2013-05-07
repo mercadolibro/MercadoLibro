@@ -144,6 +144,33 @@ class Clientes{
         return $this->telefono;
     }
 
+    private function parametros()
+    {
+        $parametros = array(
+            1=> $this->getCedula(),
+            2=> $this->getNombre(),
+            3=> $this->getApellido(),
+            4=> $this->getDireccion(),
+            5=> $this->getTelefono()
+        );
+        return $parametros;
+    }
+    
+    public function registrar_cliente()
+    {
+         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $parametros = $this->parametros();
+            $sql = "insert into mercadolibro.Clientes (cedula,nombre,apellido,direccion,telefono) values ('$parametros[1]','$parametros[2]','$parametros[3]','$parametros[4]','$parametros[5]');";
+            $sentencia = mysql_query($sql);
+            return $sentencia;
+        }
+    }
+    
     public function recibirClientes() 
     {
         $this->BD->conectar();
@@ -160,7 +187,6 @@ class Clientes{
               $CLI->setTelefono($d->telefono);
               $clientes[$CLI->getCedula()] = $CLI;
         }
-        $this->BD->desconectar();
         return $clientes;
     }
 

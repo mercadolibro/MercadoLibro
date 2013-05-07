@@ -27,23 +27,17 @@ class conexion {
   public function conectar()
   {
       $this->conexionBD = mysql_connect($this->host, $this->usuario);
-      if ($this->conexionBD == false)
-      {
-          throw new RunTimeException("No se puede conectar con el servidor");
-      }
+      return $this->conexionBD;
   }
   
   public function seleccionarBD()
   {
-        if(mysql_select_db($this->nombreBD,  $this->conexionBD) == false)
-        {
-            throw new RunTimeException("No se puede conectar con la base de datos");
-        }
+        return mysql_select_db($this->nombreBD,  $this->conexionBD);
   }
 
     public function desconectar()
   {
-        return mysql_close($this->conexionBD);
+        return mysql_close($this->db_connection);
   }
   
 }
