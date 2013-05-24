@@ -13,25 +13,24 @@
 class Vista {
     
     private $archivo;
-    private static $datos;
+    protected $datos = array();
 
     function __construct($archivo) {
         $this->archivo = $archivo;
     }
-    
-    public function setDatos($datos)
-    {
-        self::$datos = $datos;
-    }
-    
-    public static function getDatos()
-    {
-        return self::$datos;
-    }
 
+    public function set($clave,$valor){
+        $this->datos[$clave] = $valor;
+    }
+    
     public function Mostrar()
     {
-        include $this->archivo;
+        extract($this->datos);
+        ob_start(); //activa el almacenamiento en búfer de salida
+        include ($this->archivo);
+        $salida = ob_get_contents();//El contenido de este búfer interno se puede copiar a una variable de tipo string usando ob_get_contents()
+        ob_clean();
+        echo $salida;
     }
     
 }

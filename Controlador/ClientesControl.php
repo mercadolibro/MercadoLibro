@@ -29,7 +29,28 @@ class ClientesControl extends Controlador{
         return $this->vista->Mostrar();
     }
     
-    public function guardar()
+    public function login()
+    {
+        $cli = new Clientes();
+        $datos = $cli->login($_POST['txtUsuario'],$_POST['txtContrasena']);
+        $mensaje;
+        $titulo;
+        if($datos == null)
+        {
+            $mensaje = "No se pudo Iniciar Sesion, Verifique si el Usuario 'Existe' o si los datos ingresados son Correctos";
+            $titulo = "ERROR";
+        }
+        else
+        {
+            $mensaje = "Inicio sesion Correctamente";
+            $titulo = "PERFECTO";
+        }
+        $this->vista->set('mensaje',$mensaje);
+        $this->vista->set('titulo',$titulo);
+        return $this->vista->Mostrar();
+    }
+
+    public function mensaje()
     {
         $cli = new Clientes();
         $cli->setCedula($_POST['txtCedula']);
@@ -37,7 +58,23 @@ class ClientesControl extends Controlador{
         $cli->setApellido($_POST['txtApellido']);
         $cli->setDireccion($_POST['txtDireccion']);
         $cli->setTelefono($_POST['txtTelefono']);
-        return $cli->registrar_cliente();
+        $cli->setContrasena($_POST['txtContrasena']);
+        $estado = $cli->registrar_cliente();
+        $mensaje;
+        $titulo;
+        if($estado == false)
+        {
+            $mensaje = "No se pudo Guardar los datos del Cliente";
+            $titulo = "ERROR AL GURDAR";
+        }
+        else
+        {
+            $mensaje = "Guardado Correctamente";
+            $titulo = "PERFECTO";
+        }
+        $this->vista->set('mensaje',$mensaje);
+        $this->vista->set('titulo',$titulo);
+        return $this->vista->Mostrar();
     }
     
     public function volver()

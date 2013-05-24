@@ -21,12 +21,12 @@ class conexion {
       $this->host = "localhost";
       $this->usuario = "root";
       $this->pass = "root";
-      $this->nombreBD = "mercadolibro";
+      $this->nombreBD = "MercadoLibro";
   }
   
   public function conectar()
   {
-      $this->conexionBD = mysql_connect($this->host, $this->usuario);
+      $this->conexionBD = mysql_connect($this->host, $this->usuario,  $this->pass);
       return $this->conexionBD;
   }
   

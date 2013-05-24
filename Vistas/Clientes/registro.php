@@ -158,7 +158,7 @@ body  {
 <div id="apDiv4">
   <div align="left"><img src="imagenes/img1.jpg" width="452" height="238" /></div>
 </div>
-<form name="registrar" method="post" action="./guardarCLI.php">    
+<form name="registrar" method="post" action="./Accion.php?controlador=Clientes&accion=mensaje">    
 <div id="apDiv5">
   <p>
     <label>Nombre:
@@ -173,7 +173,7 @@ body  {
   <p>
     <label>Cedula:
       <input type="text" name="txtCedula" />
-    </label>
+    </label> (sera el Usuario para Entrar)
   </p>
   <p>
     <label>Direccion:
@@ -183,6 +183,11 @@ body  {
     <p>
     <label>Telefono:
       <input type="text" name="txtTelefono" />
+    </label>
+  </p>
+        <p>
+    <label>Contrasena:
+      <input type="text" name="txtContrasena" />
     </label>
   </p>
     <label>
