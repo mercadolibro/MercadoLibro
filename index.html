@@ -27,6 +27,20 @@ body {
 	background-image: url(../../../Documents/Sitio%20sin%20nombre%202/logo.png);
 }
 </style>
+<script>
+    function Validar()
+    {
+        if(form1.txtUsuario.value == "" ||
+           form1.txtContrasena.value == "")
+            {
+                alert("Campos vacios, Verifique los datos");
+            }
+            else
+            {
+                form1.submit();
+            }
+    }
+    </script>
 </head>
 
 <body>
@@ -40,14 +54,14 @@ body {
     <td width="38%"><div align="left"><img src="images/logo.png" width="340" height="316" /></div></td>
   </tr>
 </table>
-<form id="form1" name="form1" method="post" action="./Accion.php?controlador=Clientes&accion=login">
+<form id="form1" name="form1" method="post" action="./Accion.php?controlador=Clientes&accion=inicio">
   <p align="center">
-    <label for="Nombre">Email o Usuario:</label>
+    <label for="Nombre">Usuario (identificacion):</label>
     <input name="txtUsuario" type="text" id="Nombre" value="" size="40" /> 
     <span>Contraseña: </span>
     <input name="txtContrasena" type="password" id="Nombre2" value="" size="24" /> 
-    <input type="submit" name="Entrar" value="Entrar" />
-  
+    <input name="entrar" value="Entrar" type="button" onclick="Validar()"  /> </p>
+  <p align="center"><a href="./accion.php?controlador=Clientes&accion=micuenta">¿Ha olvidado su contraseña?</a></p>
 </form>
 </body>
 </html>

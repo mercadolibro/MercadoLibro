@@ -54,6 +54,12 @@ class Clientes{
      */
     private $contrasena;
     
+    /**
+     * correo del Cliente
+     * @var String
+     */
+    private $correo;
+    
     
     // ##### Metodos SET #####
     
@@ -64,6 +70,15 @@ class Clientes{
     public function setCedula($cedula)
     {
         $this->cedula = $cedula;
+    }
+    
+    /**
+     * se asigna el valor del correo
+     * @param type String
+     */
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
     }
     
      /**
@@ -123,6 +138,15 @@ class Clientes{
         return $this->cedula;
     }
     
+    /**
+     * Se devuelve el valor del correo
+     * @return String
+     */
+    public function getCorreo()
+    {
+        return $this->correo;
+    }
+    
      /**
      * Se devuelve el valor de la contrasena
      * @return String
@@ -176,9 +200,35 @@ class Clientes{
             3=> $this->getApellido(),
             4=> $this->getDireccion(),
             5=> $this->getTelefono(),
-            6=> sha1($this->getContrasena())
+            6=> sha1($this->getContrasena()),
+            7=>  $this->getCorreo()
         );
         return $parametros;
+    }
+    
+    public function Verificar_Email($correo,$cedula)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+
+            $sql = "SELECT * FROM cliente WHERE correo = '$correo' and cedula = '$cedula';";
+            $resultado = mysql_query($sql);
+            $CLI = null;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = new Clientes();
+              $CLI->setCedula($d->cedula);
+              $CLI->setNombre($d->nombre);
+              $CLI->setApellido($d->apellido);
+              $CLI->setDireccion($d->direccion);
+              $CLI->setTelefono($d->telefono);
+            }
+            return $CLI;
+        }
     }
     
     public function login($usuario,$clave)
@@ -215,7 +265,7 @@ class Clientes{
         else
         {
             $parametros = $this->parametros();
-            $sql = "insert into cliente (cedula,nombre,apellido,direccion,telefono,contrasena) values ('$parametros[1]','$parametros[2]','$parametros[3]','$parametros[4]','$parametros[5]','$parametros[6]');";
+            $sql = "insert into mercadolibro.cliente (cedula,nombre,apellido,direccion,telefono,contrasena,correo) values ('$parametros[1]','$parametros[2]','$parametros[3]','$parametros[4]','$parametros[5]','$parametros[6]','$parametros[7]');";
             $sentencia = mysql_query($sql);
             return $sentencia;
         }
