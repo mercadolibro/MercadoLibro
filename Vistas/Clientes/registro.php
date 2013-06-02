@@ -18,7 +18,9 @@ body {
            document.register.txtApellido.value == "" ||
            document.register.txtCorreo.value == "" ||
            document.register.txtTelefono.value == "" ||
-           document.register.txtDireccion.value == "")
+           document.register.txtDireccion.value == "" ||
+           document.register.txtCuenta.value == ""||
+           document.register.txtFondos.value == "")
         {
         
                 alert("Campos Vacios");
@@ -119,7 +121,17 @@ body {
                     <div class="form_row">
                     <label class="contact"><strong>Direcci&oacute;n:</strong></label>
                     <input type="text" name="txtDireccion" class="contact_input" />
-                    </div>                    
+                    </div>   
+
+                    <div class="form_row">
+                    <label class="contact"><strong>Numero de Cuenta:</strong></label>
+                    <input type="text" name="txtCuenta" class="contact_input" />
+                    </div> 
+
+                    <div class="form_row">
+                    <label class="contact"><strong>Fondos:</strong></label>
+                    <input type="text" onkeypress="return soloNumeros(event)" name="txtFondos" class="contact_input" />
+                    </div> 
 
                     <div class="form_row">
                       <div class="terms">

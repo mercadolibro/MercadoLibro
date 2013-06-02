@@ -60,6 +60,18 @@ class Clientes{
      */
     private $correo;
     
+    /**
+     * cuenta del Cliente
+     * @var String
+     */
+    private $cuenta;
+    
+    /**
+     * fondo del Cliente
+     * @var String
+     */
+    private $fondos;
+    
     
     // ##### Metodos SET #####
     
@@ -70,6 +82,24 @@ class Clientes{
     public function setCedula($cedula)
     {
         $this->cedula = $cedula;
+    }
+    
+    /**
+     * se asigna el valor de la Cuenta
+     * @param type Long
+     */
+    public function setCuenta($cuenta)
+    {
+        $this->cuenta = $cuenta;
+    }
+    
+    /**
+     * se asigna los fondos
+     * @param type Long
+     */
+    public function setFondos($fondos)
+    {
+        $this->fondos = $fondos;
     }
     
     /**
@@ -139,6 +169,24 @@ class Clientes{
     }
     
     /**
+     * Se devuelve el valor de la cuenta
+     * @return Long
+     */
+    public function getCuenta()
+    {
+        return $this->cuenta;
+    }
+    
+    /**
+     * Se devuelve el valor del fondo
+     * @return Long
+     */
+    public function getFondos()
+    {
+        return $this->fondos;
+    }
+    
+    /**
      * Se devuelve el valor del correo
      * @return String
      */
@@ -201,7 +249,11 @@ class Clientes{
             4=> $this->getDireccion(),
             5=> $this->getTelefono(),
             6=> sha1($this->getContrasena()),
-            7=>  $this->getCorreo()
+            7=>  $this->getCorreo(),
+            8=>  $this->getCuenta(),
+            9=>  $this->getFondos()
+
+            
         );
         return $parametros;
     }
@@ -226,6 +278,7 @@ class Clientes{
               $CLI->setApellido($d->apellido);
               $CLI->setDireccion($d->direccion);
               $CLI->setTelefono($d->telefono);
+               $CLI->setCorreo($d->correo);
             }
             return $CLI;
         }
@@ -239,7 +292,6 @@ class Clientes{
         }
         else
         {
-            $clave = sha1($clave);
             $sql = "SELECT * FROM cliente WHERE cedula = '$usuario' and contrasena = '$clave';";
             $resultado = mysql_query($sql);
             $CLI = null;
@@ -255,6 +307,37 @@ class Clientes{
             return $CLI;
         }
     }
+    
+    public function actualizar_contrasena($nueva_contra,$cedula)
+    {
+         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $nueva_contra = sha1($nueva_contra);
+            $sql = "UPDATE mercadolibro.cliente SET contrasena = '$nueva_contra' WHERE cedula = '$cedula';";
+            $sentencia = mysql_query($sql);
+            return $sentencia;
+        }
+    }
+    
+    public function modificar($cedula)
+    {
+         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "UPDATE mercadolibro.cliente SET cedula='$this->cedula',nombre='$this->nombre',
+                    apellido='$this->apellido',direccion='$this->direccion',telefono='$this->telefono',
+                    correo ='$this->correo' WHERE cedula = '$cedula';";
+            $sentencia = mysql_query($sql);
+            return $sentencia;
+        }
+    }
 
     public function registrar_cliente()
     {
@@ -265,29 +348,30 @@ class Clientes{
         else
         {
             $parametros = $this->parametros();
-            $sql = "insert into mercadolibro.cliente (cedula,nombre,apellido,direccion,telefono,contrasena,correo) values ('$parametros[1]','$parametros[2]','$parametros[3]','$parametros[4]','$parametros[5]','$parametros[6]','$parametros[7]');";
+            $sql = "insert into mercadolibro.cliente (cedula,nombre,apellido,direccion,telefono,contrasena,correo,cuenta,fondos) values ('$parametros[1]','$parametros[2]','$parametros[3]','$parametros[4]','$parametros[5]','$parametros[6]','$parametros[7]','$parametros[8]','$parametros[9]');";
             $sentencia = mysql_query($sql);
             return $sentencia;
         }
     }
     
-    public function recibirClientes() 
+    public function recibirClientes($valor) 
     {
         $this->BD->conectar();
-        $sql = "SELECT cedula, nombre, apellido, direccion, telefono FROM mercadolibro.Clientes";
+        $sql = "SELECT * FROM mercadolibro.cliente WHERE cedula = '$valor';";
         $resultado = mysql_query($sql);
-        $clientes = array();
-        while($d = mysql_fetch_object($resultado))
-        {
+            $CLI = null;
+            while($d = mysql_fetch_object($resultado))
+            {
               $CLI = new Clientes();
               $CLI->setCedula($d->cedula);
               $CLI->setNombre($d->nombre);
               $CLI->setApellido($d->apellido);
               $CLI->setDireccion($d->direccion);
               $CLI->setTelefono($d->telefono);
-              $clientes[$CLI->getCedula()] = $CLI;
-        }
-        return $clientes;
+              $CLI->setCorreo($d->correo);
+              $CLI->setContrasena($d->contrasena);
+            }
+            return $CLI;
     }
 
 }

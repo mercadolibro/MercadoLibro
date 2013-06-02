@@ -9,6 +9,9 @@
     require_once './Modelos/Libros.php';
     require_once './Controlador/Controlador.php';
     require_once './Controlador/ClientesControl.php';
+    require_once './utiles/class.phpmailer.php';
+    require_once './utiles/class.pop3.php';
+    require_once './utiles/class.smtp.php';
  
     
     $controlador = "";
@@ -22,7 +25,9 @@
     
     if(isset($_GET['consulta']))
     {
-        $consulta = $_GET['consulta'];
+        $parametros = array();
+        $parametros = explode("/", $_GET['consulta']);
+        $consulta = $parametros;
     }
     $modelo = $controlador;
     $accion = $_GET['accion'];
