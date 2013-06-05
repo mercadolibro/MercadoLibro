@@ -1,25 +1,4 @@
-<?php
-//session_start();
-    if(!isset($_SESSION['cliente.id']))
-    { ?>
-        <!DOCTYPE html>
-        <html>
-            <head>
-                <title> --- SESION --- </title>
-            </head>
-            <body>
-                <h1> ERROR </h1>
-                <div>
-                    <p>Sesion no Iniciada</p>
-                </div>
-                <br>
-                    <a href="index.php"> Volver </a>
-            </body>
-        </html>
-    <?php }
-    else
-    {
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -114,7 +93,8 @@ body {
         
         <div class="right_content">
           <div class="cart">
-            <div class="title"><span class="title_icon"><img src="images/bullet6.gif" alt="" title="" /></span>Usuario:<a href="./Accion.php?controlador=Clientes&accion=perfil&consulta=<?php echo $datos->getCedula();?>"><?php echo $datos->getNombre()." ".$datos->getApellido(); ?></a></div>
+            <div class="title"><span class="title_icon"><img src="images/bullet6.gif" alt="" title="" /></span>Usuario:<a href="./Accion.php?controlador=Clientes&accion=perfil&consulta=<?php echo $datos->getCedula();?>"><?php echo $datos->getNombre(); ?></a></div>
+            
             <a href="Bienvenido.html" class="view_cart">Salir</a> </div>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
@@ -171,4 +151,3 @@ body {
 
 </body>
 </html>
-    <?php } ?>

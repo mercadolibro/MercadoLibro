@@ -113,25 +113,21 @@ class ClientesControl extends Controlador{
     {
         session_start();
         
-        if($con == null)
+        if(isset($_POST['txtContrasena']) && (isset($_POST['txtUsuario'])))
+        {
+            $con[1] = sha1($_POST['txtContrasena']);
+            $con[0] = $_POST['txtUsuario'];
+        }
+        else
+        {
+            if(isset($_SESSION['cliente.id']))
             {
-                if(!isset($_SESSION['txtContrasena']))
-                {
-                    return $this->vista->Mostrar();
-                }
-                else
-                {
-                    $con[0]=$_POST['txtUsuario'];
-                    $con[1]=sha1($_POST['txtContrasena']);
-                }
+                $a = new Clientes();
+                $b = $a->Entrar($_SESSION['cliente.id']);
+                $con[0] = $_SESSION['cliente.id'];
+                $con[1] = $b->getContrasena();
             }
-            else
-            {
-                if(!isset($_SESSION['cliente.id']))
-                {
-                     return $this->vista->Mostrar();
-                }
-            }
+        }
         
         $cli = new Clientes();
         $datos = $cli->login($con[0],$con[1]);

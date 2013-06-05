@@ -152,7 +152,7 @@
         
         <div class="right_content">
           <div class="cart">
-            <div class="title"><span class="title_icon"><img src="images/bullet6.gif" alt="" title="" /></span><?php echo $datos->getNombre()." ".$datos->getApellido(); ?></div>
+            <div class="title"><span class="title_icon"><img src="images/bullet6.gif" alt="" title="" /></span><?php echo $datos->getNombre(); ?></div>
             <a href="Bienvenido.html" class="view_cart">SALIR</a> </div>
           <p>&nbsp;</p>
           <div class="currency">

@@ -284,6 +284,31 @@ class Clientes{
         }
     }
     
+    public function Entrar($usuario)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT * FROM cliente WHERE cedula = '$usuario';";
+            $resultado = mysql_query($sql);
+            $CLI = null;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = new Clientes();
+              $CLI->setCedula($d->cedula);
+              $CLI->setNombre($d->nombre);
+              $CLI->setApellido($d->apellido);
+              $CLI->setDireccion($d->direccion);
+              $CLI->setTelefono($d->telefono);
+              $CLI->setContrasena($d->contrasena);
+            }
+            return $CLI;
+        }
+    }
+    
     public function login($usuario,$clave)
     {
         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
