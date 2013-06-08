@@ -17,12 +17,13 @@
     <script>
     function Validar()
     {
-        if(document.register.txtCedula.value == "" ||
-           document.register.txtNombre.value == "" ||
+        if(document.register.txtNombre.value == "" ||
            document.register.txtApellido.value == "" ||
            document.register.txtCorreo.value == "" ||
            document.register.txtTelefono.value == "" ||
-           document.register.txtDireccion.value == "")
+           document.register.txtDireccion.value == "" ||
+           document.register.txtCuenta.value == "" ||
+           document.register.txtFondos.value == "")
         {
         
                 alert("Campos Vacios");
@@ -93,15 +94,14 @@
                                         <p class="more_details">Apellido:<?php echo " ".$datos->getApellido(); ?></p>
                                         <p class="more_details">Email:<?php echo " ".$datos->getCorreo(); ?></p>
                                         <p class="more_details">Telefono:<?php echo " ".$datos->getTelefono(); ?></p>
-                                        <p class="more_details">Direcci&oacute;n:<?php echo " ".$datos->getDireccion(); ?></p>                           
+                                        <p class="more_details">Direcci&oacute;n:<?php echo " ".$datos->getDireccion(); ?></p>  
+                                        <p class="more_details">Numero de Cuenta::<?php echo " ".$datos->getCuenta(); ?></p> 
+                                        <p class="more_details">Fondos:<?php echo " ".$datos->getFondos(); ?></p> 
               </div>	
 <form name="register" method="post" action="./Accion.php?controlador=Clientes&accion=modificar&consulta=<?php echo $datos->getCedula();?>">
                             <div style="display: none;" class="tab" id="tab2">
                                 <br>
-<div class="form_row">
-                    <label class="contact"><strong>Identificaci&oacute;n:</strong></label>
-                    <input type="text" onkeypress="return soloNumeros(event)" name="txtCedula" class="contact_input" />
-                    </div>
+
 
                     <div class="form_row">
                     <label class="contact"><strong>Nombres:</strong></label>
@@ -130,6 +130,17 @@
                     <label class="contact"><strong>Direcci&oacute;n:</strong></label>
                     <input type="text" name="txtDireccion" class="contact_input" />
                     </div>
+                    
+                    <div class="form_row">
+                    <label class="contact"><strong>Numero de Cuenta:</strong></label>
+                    <input type="text" name="txtCuenta" class="contact_input" />
+                    </div>
+                                    
+                    <div class="form_row">
+                    <label class="contact"><strong>Fondos:</strong></label>
+                    <input type="text" name="txtFondos" class="contact_input" />
+                    </div>
+                                    
                                     <br>
                                         <br>
   <input type="button" onclick="Validar()" name="mod" id="mod" value="Modificar Informacion" />

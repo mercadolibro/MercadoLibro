@@ -356,9 +356,9 @@ class Clientes{
         }
         else
         {
-            $sql = "UPDATE mercadolibro.cliente SET cedula='$this->cedula',nombre='$this->nombre',
+            $sql = "UPDATE mercadolibro.cliente SET nombre='$this->nombre',
                     apellido='$this->apellido',direccion='$this->direccion',telefono='$this->telefono',
-                    correo ='$this->correo' WHERE cedula = '$cedula';";
+                    correo ='$this->correo',cuenta = '$this->cuenta',fondos='$this->fondos' WHERE cedula = '$cedula';";
             $sentencia = mysql_query($sql);
             return $sentencia;
         }
@@ -395,6 +395,8 @@ class Clientes{
               $CLI->setTelefono($d->telefono);
               $CLI->setCorreo($d->correo);
               $CLI->setContrasena($d->contrasena);
+              $CLI->setCuenta($d->cuenta);
+              $CLI->setFondos($d->fondos);
             }
             return $CLI;
     }

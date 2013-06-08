@@ -29,12 +29,14 @@ class ClientesControl extends Controlador{
     public function modificar($cedula)
     {
         $this->modelo = new Clientes();
-        $this->modelo->setCedula($_POST['txtCedula']);
+        //$this->modelo->setCedula($_POST['txtCedula']);
         $this->modelo->setNombre($_POST['txtNombre']);
         $this->modelo->setApellido($_POST['txtApellido']);
         $this->modelo->setDireccion($_POST['txtDireccion']);
         $this->modelo->setTelefono($_POST['txtTelefono']);
         $this->modelo->setCorreo($_POST['txtCorreo']);
+        $this->modelo->setCuenta($_POST['txtCuenta']);
+        $this->modelo->setFondos($_POST['txtFondos']);
         $estado = $this->modelo->modificar($cedula[0]);
         $this->vista->set('estado',$estado);
         return $this->vista->Mostrar();
@@ -140,8 +142,10 @@ class ClientesControl extends Controlador{
         {
             $this->vista->set('titulo',"ERROR");
             $this->vista->set('mensaje',"Datos incorrectos");
+            $this->vista->set('estado',false);
+            return $this->vista->Mostrar();
         }
-        
+        $this->vista->set('estado',true);
         $this->vista->set('datos',$datos);
         return $this->vista->Mostrar();
     }

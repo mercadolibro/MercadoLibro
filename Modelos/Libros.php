@@ -72,6 +72,114 @@ class Libros {
      * Se asigna el valor del nombre
      * @param type String
      */
+       private $valor;
+    
+    // ##### Metodos SET #####
+    
+    /**
+     * Se asigna el valor del libro
+     * @param type Integer
+     */
+    public function setValor($valor)
+    {
+        $this->valor = $valor;
+    }
+    
+    /**
+     * Se asigna el valor del nombre
+     * @param type String
+     */
+ 
+    public function getValor()
+    {
+        return $this->valor;
+    }
+    
+    /**
+     * devuelve el nombre del libro
+     * @return String
+     */
+    private $portada;
+    
+    // ##### Metodos SET #####
+    
+    /**
+     * Se asigna la portada del libro
+     * @param type longblob
+     */
+    public function setPortada($portada)
+    {
+        $this->portada = $portada;
+    }
+    
+    /**
+     * Se asigna el valor de la portada
+     * @param type longblob
+     */
+ 
+    public function getPortada()
+    {
+        return $this->portada;
+    }
+    
+    /**
+     * devuelve el nombre de la portada
+     * @return String
+     */
+    private $descripcion;
+    
+    // ##### Metodos SET #####
+    
+    /**
+     * Se asigna el valor del libro
+     * @param type Integer
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+    
+    /**
+     * Se asigna el valor del nombre
+     * @param type String
+     */
+ 
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    
+    /**
+     * devuelve el nombre del libro
+     * @return String
+     */
+    private $cantidad;
+    
+    // ##### Metodos SET #####
+    
+    /**
+     * Se asigna el valor del libro
+     * @param type Integer
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
+    
+    /**
+     * Se asigna el valor del nombre
+     * @param type String
+     */
+ 
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+    
+    /**
+     * devuelve el nombre del libro
+     * @return String
+     */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
