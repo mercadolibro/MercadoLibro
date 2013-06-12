@@ -400,6 +400,39 @@ class Clientes{
             }
             return $CLI;
     }
+    
+    public function Fondo($clave)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "select fondos from mercadolibro.cliente where cedula = '$clave';";
+            $resultado = mysql_query($sql);
+            $CLI;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = $d->fondos;
+            }
+            return $CLI;
+        }
+    }
+    
+    public function actualizar_fondos($cedula,$fondo)
+    {
+         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "UPDATE mercadolibro.cliente SET fondos='$fondo' WHERE cedula = '$cedula';";
+            $sentencia = mysql_query($sql);
+            return $sentencia;
+        }
+    }
 
 }
 

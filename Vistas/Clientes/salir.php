@@ -21,7 +21,7 @@ body {
        		<div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>            
         <div id="menu">
             <ul>                                                                       
-                <li><a href="<?php echo $link; ?>">Volver</a></li>
+                <li><a href="index.php">Salir</a></li>
             <li></li>
             <li class="selected"></li>
             <li></li>
@@ -44,11 +44,11 @@ body {
              <p>&nbsp;</p>
              <table width="391" height="15" border="0">
                <tr>
-                 <td width="385"><div align="center" class="Titulo"><h1><?php echo $titulo; ?></h1></div></td>
+                 <td width="385"><div align="center" class="Titulo"><h1>-- Cerrar Sesion --</h1></div></td>
                </tr>
                <tr>
                  <td class="right">
-                 <p><?php echo $mensaje; ?></p></td>
+                 <p>Gracias por Ingresar a nuestra Pagina, Esperamos quq regreses pronto. Adios !!</p></td>
                </tr>
              </table>
              <p>&nbsp;</p>
@@ -72,4 +72,3 @@ body {
 
 </body>
 </html>
-

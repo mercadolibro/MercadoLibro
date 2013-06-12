@@ -18,11 +18,28 @@ class ClientesControl extends Controlador{
         parent::__construct($modelo, $accion);
     }
     
+    public function salir()
+    {
+        session_start();
+        session_destroy();
+        return $this->vista->Mostrar();
+    }
+    
     public function modiContra($cedula)
     {
         $this->modelo = new Clientes();
         $estado = $this->modelo->actualizar_contrasena($_POST['txtContrasena'],$cedula[0]);
-        $this->vista->set('estado',$estado);
+        if ($estado == false)
+        {
+            $this->vista->set('titulo',"-- Error --");
+            $this->vista->set('mensaje',"No se puede modificar la contrasena, Por favor intente mas tarde.");
+        }
+        else
+        {
+            $this->vista->set('titulo',"Prefecto");
+            $this->vista->set('mensaje',"El proceso ha finalizado satisfactoriamente, Se ha modificado su contrasena.");
+        }
+        $this->vista->set('link',"index.php");
         return $this->vista->Mostrar();
     }
     
@@ -38,6 +55,18 @@ class ClientesControl extends Controlador{
         $this->modelo->setCuenta($_POST['txtCuenta']);
         $this->modelo->setFondos($_POST['txtFondos']);
         $estado = $this->modelo->modificar($cedula[0]);
+        if ($estado == false)
+        {
+            $this->vista->set('titulo',"-- Error --");
+            $this->vista->set('mensaje',"No se ha podido efectuar la modificacion, Verifique que los datos son correctos e intente mas tarde.");
+            $this->vista->set('link',"./Accion.php?controlador=Clientes&accion=perfil");
+        }
+        else 
+        {
+            $this->vista->set('titulo',"Prefecto");
+            $this->vista->set('mensaje',"El proceso ha finalizado satisfactoriamente,Sus datos han sido modificados correctamente.");
+            $this->vista->set('link',"./Accion.php?controlador=Clientes&accion=inicio");
+        } 
         $this->vista->set('estado',$estado);
         return $this->vista->Mostrar();
     }
@@ -74,12 +103,14 @@ class ClientesControl extends Controlador{
             $mailer->Username = "mercadolibro123@gmail.com";
             $mailer->Password = "mercadolibro123456";
             if (!$mailer->Send()) {
-                $this->vista->set('titulo',"ERROR");
+                $this->vista->set('titulo',"-- ERROR --");
                 $this->vista->set("mensaje", "Error al enviar correo! (" . $mailer->ErrorInfo . ")");
+                $this->vista->set('link',"index.php");
                 return $this->vista->Mostrar();
             } else {
-                $this->vista->set('titulo',"TODO BIEN");
-                $this->vista->set('mensaje', 'Se ha enviado la informaci&oacute;n de acceso a su correo.');
+                $this->vista->set('titulo',"!! Perfecto !!");
+                $this->vista->set('link',"index.php");
+                $this->vista->set('mensaje', 'Se ha enviado correctamente un Email para Restablecer su contraseña a su correo electronico, Por favor revise su correo');
                 return $this->vista->Mostrar();
             }
     }
@@ -94,8 +125,10 @@ class ClientesControl extends Controlador{
         }
         else
         {
+            
            $this->vista->set('titulo',"ERROR");
-           $this->vista->set('mensaje',"Datos Incorrectos, Verifique los datos Ingresados"); 
+            $this->vista->set('link',"./accion.php?controlador=Clientes&accion=micuenta");
+           $this->vista->set('mensaje',"Datos Incorrectos, Por favor verifique si el Usuario esta registrado con el Email ingresado o si los datos estan correctos."); 
            $this->vista->Mostrar();
         }
         
@@ -137,11 +170,16 @@ class ClientesControl extends Controlador{
         {
             //session_start();
             $_SESSION['cliente.id'] = $datos->getCedula();
+            $li = new Libros();
+            $libro = $li->inicio();
+            $this->vista->set('datos2',$libro);
+            $a = $li->deta("1b");
+            $this->vista->set('datos3',$a);
         }
         else
         {
-            $this->vista->set('titulo',"ERROR");
-            $this->vista->set('mensaje',"Datos incorrectos");
+            $this->vista->set('titulo',"-- Error --");
+            $this->vista->set('mensaje',"Datos incorrectos, Verifique si el Usuario esta registrado o si los datos estan Correctos");
             $this->vista->set('estado',false);
             return $this->vista->Mostrar();
         }
@@ -165,18 +203,22 @@ class ClientesControl extends Controlador{
         $estado = $cli->registrar_cliente();
         $mensaje;
         $titulo;
+        $link;
         if($estado == false)
         {
-            $mensaje = "No se pudo Guardar los datos del Cliente";
-            $titulo = "ERROR AL GURDAR";
+            $mensaje = "El numero de Identificacion que ha ingresado ya existe,Por favor verifique los datos.";
+            $titulo = "Error al Guardar";
+            $link = "./Accion.php?controlador=Clientes&accion=registro";
         }
         else
         {
-            $mensaje = "Guardado Correctamente";
-            $titulo = "PERFECTO";
+            $mensaje = "Los datos ingresados del cliente, se han guardado correctamente.";
+            $titulo = "Felicitaciones";
+            $link = "index.php";
         }
         $this->vista->set('mensaje',$mensaje);
         $this->vista->set('titulo',$titulo);
+        $this->vista->set('link',$link);
         return $this->vista->Mostrar();
     }
     

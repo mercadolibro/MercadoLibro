@@ -13,6 +13,12 @@
 
 class Libros {
     
+    private $BD;
+    
+    public function __construct() {
+        $this->BD = new conexion();
+    }
+    
     // ##### Atributos #####
     
     /**
@@ -294,6 +300,153 @@ class Libros {
     {
         return $this->ano;
     }
+    
+    public function libros()
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT * FROM libro;";
+            $resultado = mysql_query($sql);
+            $libro= array();
+            while($d = mysql_fetch_object($resultado))
+            {
+              $LI = new Libros();
+              $LI->setPortada($d->portada);
+              $LI->setCodigo($d->codigo);
+              $libro[$LI->getCodigo()] = $LI;
+            }
+            return $libro;
+        }
+    }
+    
+    public function detalles($codigo)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT * FROM libro WHERE codigo = '$codigo[0]';";
+            $resultado = mysql_query($sql);
+            $CLI = null;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = new Libros();
+              $CLI->setCodigo($d->codigo);
+              $CLI->setNombre($d->nombre);
+              $CLI->setPortada($d->portada);
+              $CLI->setValor($d->valor);
+              $CLI->setAutor($d->autor);
+              $CLI->setCategoria($d->categoria);
+              $CLI->setEditorial($d->editorial);
+              $CLI->setAno($d->anio);
+              $CLI->setEdicion($d->edicion);
+              $CLI->setDescripcion($d->descripcion);
+              $CLI->setCantidad($d->cantidad);
+            }
+            return $CLI;
+        }
+    }
+    
+    public function deta($codigo)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT * FROM libro WHERE codigo = '$codigo';";
+            $resultado = mysql_query($sql);
+            $CLI = null;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = new Libros();
+              $CLI->setCodigo($d->codigo);
+              $CLI->setNombre($d->nombre);
+              $CLI->setPortada($d->portada);
+              $CLI->setValor($d->valor);
+              $CLI->setAutor($d->autor);
+              $CLI->setCategoria($d->categoria);
+              $CLI->setEditorial($d->editorial);
+              $CLI->setAno($d->anio);
+              $CLI->setEdicion($d->edicion);
+              $CLI->setDescripcion($d->descripcion);
+              $CLI->setCantidad($d->cantidad);
+            }
+            return $CLI;
+        }
+    }
+    
+    public function cantidad($codigo)
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT cantidad FROM libro WHERE codigo = '$codigo';";
+            $resultado = mysql_query($sql);
+            $CLI;
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = $d->cantidad;
+            }
+            return $CLI;
+        }
+    }
+    
+    public function Actualizar_cat($codigo,$cant)
+    {
+         if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "UPDATE mercadolibro.libro SET cantidad='$cant' WHERE codigo = '$codigo';";
+            $sentencia = mysql_query($sql);
+            return $sentencia;
+        }
+    }
+    
+     public function inicio()
+    {
+        if($this->BD->conectar() == false || $this->BD->seleccionarBD() == false)
+        {
+            throw new RunTimeException("No se puede conectar con el servidor");
+        }
+        else
+        {
+            $sql = "SELECT * FROM libro;";
+            $resultado = mysql_query($sql);
+            $libro = array();
+            while($d = mysql_fetch_object($resultado))
+            {
+              $CLI = new Libros();
+              $CLI->setCodigo($d->codigo);
+              $CLI->setNombre($d->nombre);
+              $CLI->setPortada($d->portada);
+              $CLI->setValor($d->valor);
+              $CLI->setAutor($d->autor);
+              $CLI->setCategoria($d->categoria);
+              $CLI->setEditorial($d->editorial);
+              $CLI->setAno($d->anio);
+              $CLI->setEdicion($d->edicion);
+              $CLI->setDescripcion($d->descripcion);
+              $CLI->setCantidad($d->cantidad);
+              $libro[$CLI->getCodigo()] = $CLI;
+            }
+            return $libro;
+        }
+    }
+    
 }
 
 ?>

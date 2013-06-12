@@ -7,8 +7,11 @@
     require_once './ConexionBD/conexion.php';
     require_once './Modelos/Clientes.php';
     require_once './Modelos/Libros.php';
+    require_once './Modelos/Compra.php';
     require_once './Controlador/Controlador.php';
     require_once './Controlador/ClientesControl.php';
+    require_once './Controlador/LibroControl.php';
+    require_once './Controlador/CompraControl.php';
     require_once './utiles/class.phpmailer.php';
     require_once './utiles/class.pop3.php';
     require_once './utiles/class.smtp.php';

@@ -21,7 +21,7 @@ body {
        		<div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>            
         <div id="menu">
             <ul>                                                                       
-                <li><a href="<?php echo $link; ?>">Volver</a></li>
+            <li><a href="index.php">Volver</a></li>
             <li></li>
             <li class="selected"></li>
             <li></li>
@@ -72,4 +72,3 @@ body {
 
 </body>
 </html>
-

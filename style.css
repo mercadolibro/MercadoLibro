@@ -8,6 +8,11 @@ body
 	color: #000000;
 	background-image: url(images/bakground.jpg);
 }
+
+#gio{
+    word-wrap: break-word;
+    padding:10px;
+}
 a{
 color:#f8981d;
 }
@@ -37,7 +42,8 @@ font-size:11px;
 }
 #wrap{
 width:900px;
-height: auto;
+
+/* height: auto; */
 margin:auto;
 background-color:#FFFFFF;
 }
@@ -114,6 +120,17 @@ span.colors{
 padding:2px 2px 0 2px;
 }
 
+#tabla{
+   width:950px;
+ 
+    width:100%;
+}
+
+#portada{
+     border-radius:5px;
+    display:inline-block;
+    margin-top:15px;
+}
 
 /*------------------------------------center content--------------------*/
 .center_content{
@@ -201,6 +218,7 @@ background:url(images/box_top.gif) no-repeat center bottom;
 }
 .box_center{
 width:295px;
+/* display: inline-block; */
 height:auto;
 background:url(images/box_center.gif) repeat-y center;
 }
@@ -563,8 +581,8 @@ color:#afaeaf;
 	width: auto;
 }
 .asdfg {
-	height: 340px;
-	width: 900px;
-	background-image: url(images/Sin%20t%C3%ADtulo-2.jpg);
+	/* height: 340px; */
+	width: 950px;
+	background-image: url(images/fondocontenido.jpg);
 	background-repeat: repeat-y;
 }

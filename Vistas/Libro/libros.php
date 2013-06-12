@@ -1,4 +1,4 @@
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -18,16 +18,17 @@ body {
 <div id="wrap">
 
   <div class="header">
-       		<div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>            
+       		<div class="logo"><a href="./Accion.php?controlador=Clientes&accion=inicio"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>            
         <div id="menu">
             <ul>                                                                       
-                <li><a href="<?php echo $link; ?>">Volver</a></li>
+            <li><a href="./Accion.php?controlador=Clientes&accion=inicio">Inicio</a></li>
             <li></li>
-            <li class="selected"></li>
-            <li></li>
-            <li></li>
+            <li class="selected"><a>Libros</a></li>
             <li></li>
             <li></li>
+            <li></li>
+            <li><a href="./Accion.php?controlador=Libro&accion=carro">Carro de compras</a></li>
+             <li><a href="./Accion.php?controlador=Clientes&accion=perfil&consulta=<?php session_start(); echo $_SESSION['cliente.id'] ?>">Mi Cuenta</a></li>
             <li></li>
             </ul>
         </div>     
@@ -39,20 +40,23 @@ body {
          <!--end of left content-->
          <!--end of right content-->
          <div class="clear">
- 
+           <p>&nbsp;</p>
+           <div class="title"><span class="title_icon"></span> Lista de Libros</div>
+           <p>&nbsp;</p>
            <div align="center">
              <p>&nbsp;</p>
-             <table width="391" height="15" border="0">
+             <table width="200" border="0" id="tabla">
                <tr>
-                 <td width="385"><div align="center" class="Titulo"><h1><?php echo $titulo; ?></h1></div></td>
-               </tr>
-               <tr>
-                 <td class="right">
-                 <p><?php echo $mensaje; ?></p></td>
+                 <td>&nbsp;</td>
+                 <?php foreach ($datos as $item) { ?>
+                
+                    <td id="portada"><a href="./Accion.php?controlador=Libro&accion=detalles&consulta=<?php echo $item->getCodigo();?>"><img style="border-radius:5px;" src="<?php echo $item->getPortada(); ?>"  alt="" width="169" height="181" /></a></td>
+                
+                 <?php } ?>
+                 
+                 <td>&nbsp;</td>
                </tr>
              </table>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
            </div>
            <p>&nbsp;</p>
            <p>&nbsp;</p>
@@ -72,4 +76,3 @@ body {
 
 </body>
 </html>
-

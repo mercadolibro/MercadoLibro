@@ -58,11 +58,11 @@
        		<div class="logo"><a href="./Accion.php?controlador=Clientes&accion=inicio&consulta=<?php echo $datos->getCedula();?>/<?php echo $datos->getContrasena();?>"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>            
         <div id="menu">
             <ul>                                                                       
-            <li class="selected"><a href="./Accion.php?controlador=Clientes&accion=inicio&consulta=<?php echo $datos->getCedula();?>/<?php echo $datos->getContrasena();?>">Inicio</a></li>
+            <li><a href="./Accion.php?controlador=Clientes&accion=inicio&consulta=<?php echo $datos->getCedula();?>/<?php echo $datos->getContrasena();?>">Inicio</a></li>
             <li></li>
-            <li><a href="libros.html">Libros</a></li>
-            <li><a href="carro.html">Carro de compras</a></li>
-            <li><a href="./Accion.php?controlador=Clientes&accion=perfil&consulta=<?php echo $datos->getCedula();?>">Mi cuenta</a></li>
+            <li><a href="./Accion.php?controlador=Libro&accion=libros">Libros</a></li>
+            <li><a href="./Accion.php?controlador=Libro&accion=carro">Carro de compras</a></li>
+            <li class="selected"><a>Mi cuenta</a></li>
             <li></li>
             <li></li>
             <li></li>
@@ -164,21 +164,9 @@
         <div class="right_content">
           <div class="cart">
             <div class="title"><span class="title_icon"><img src="images/bullet6.gif" alt="" title="" /></span><?php echo $datos->getNombre(); ?></div>
-            <a href="Bienvenido.html" class="view_cart">SALIR</a> </div>
+            <a href="./Accion.php?controlador=Clientes&accion=salir" class="view_cart">SALIR</a> </div>
           <p>&nbsp;</p>
-          <div class="currency">
-            <span class="red">MONEDA: </span>
-          <a href="#">$PESOS COL</a></div>
-                
-                
-          <div class="cart">
-                  <div class="title"><span class="title_icon"><img src="images/cart.gif" alt="" title="" /></span>Mis comprast</div>
-            <div class="home_cart_content">
-                  3 x items | <span class="red">TOTAL: 100$</span>
-              </div>
-              <a href="carro.html" class="view_cart">Ver carro</a>
-              
-            </div>
+          
         
              <div class="title"><span class="title_icon"><img src="images/bullet3.gif" alt="" title="" /></span>MercadoLibro</div> 
              <div class="about">
