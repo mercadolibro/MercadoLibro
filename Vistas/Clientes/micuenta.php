@@ -15,7 +15,7 @@ body {
         if(document.register.txtEmail.value == "" ||
            document.register.txtCedula.value == "")
         {
-            alert("Por favor, Ingrese su Correo y su Usuario (identificacion)");
+            alert("Por favor,Ingrese su Correo y su Usuario (identificacion)");
         }
         else
         {
